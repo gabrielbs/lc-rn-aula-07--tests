@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "lc-rn-aula-03--melhorias-feed",
+    "slug": "lc-rn-aula-03--melhorias-feed",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
