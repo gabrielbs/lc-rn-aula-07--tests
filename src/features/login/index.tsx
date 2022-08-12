@@ -6,11 +6,13 @@ import {ButtonText, CustomButton} from "../../ds/CustomButton";
 import {CustomText} from "../../ds/CustomText";
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {StackType} from "../../routes/types";
+import {StatusBar} from "expo-status-bar";
 
 export const Login = () => {
   const navigation = useNavigation<NavigationProp<StackType>>();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [isError, setIsError] = React.useState(false);
 
   const loginHandler = async () => {
     try {
@@ -21,6 +23,8 @@ export const Login = () => {
         responseObject?.password === password
       ) {
         navigation.navigate("feed");
+      } else {
+        setIsError(true);
       }
     } catch (error) {
       console.log({error});
@@ -38,11 +42,17 @@ export const Login = () => {
           onChangeText={setPassword}
         />
       </Box>
+      {isError && (
+        <Box>
+          <CustomText variant="regular">Usuário ou senha incorretos</CustomText>
+        </Box>
+      )}
       <Box marginTop={10}>
         <CustomButton onPress={() => loginHandler()}>
           <ButtonText variant="regular">Login</ButtonText>
         </CustomButton>
       </Box>
+      <StatusBar />
     </Box>
   );
 };
